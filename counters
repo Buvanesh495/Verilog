@@ -4,6 +4,9 @@ module counters(q,clk,rst,n);
   input clk,rst;
   output [n-1:0]q;
   reg [n-1:0];
+  
+  
+  i added a new line here
 
   always @ (posedge clk or posedge rst)
   begin
