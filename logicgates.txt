@@ -1,0 +1,35 @@
+module tb_my_and;
+  wire z;
+  reg a,b;
+
+  my_and u1(z,a,b);
+
+  intial
+    begin
+    $dumpfile("and.vcd");
+    $dumpvars;
+    a<=0;
+    b<=0;
+    #10
+    a<=0;
+    b<=1;
+    #10
+    a<=1;
+    b<=0;
+    #10
+    a<=1;
+    b<=1;
+    #10
+    $finish;
+  end
+endmodule
+
+
+module my_and(z,a,b);
+  input a,b;
+  output z;
+
+  begin
+    assign z=a&b;
+  end
+endmodule

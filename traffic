@@ -1,0 +1,70 @@
+// Code your testbench here
+// or browse Examples
+module tb_modifiedtraffic;
+  wire cr;
+  reg rst,clk,ta,tb;
+
+  traffic u1(clk,rst,cr,ta,tb);
+
+  always #10 clk = ~clk;
+
+  initial
+    begin
+      $dumpfile("dump.vcd");
+      $dumpvars;
+      rst<=0;
+      clk<=0;
+      ta<=0;
+      tb<=0;
+      #5
+      rst<=1;
+      #10
+      rst<=0;
+      ta<=1;
+      tb<=1;
+      #1200
+      $finish;
+    end
+endmodule
+
+
+
+// Code your design here
+module traffic(clk,rst,cr,ta,tb);
+
+input clk,rst,ta,tb;
+output cr;
+//[3:0]q=4'b0000;
+reg [3:0]q,ta,tb;
+reg cr,x;
+always @ (posedge clk or posedge rst)
+begin
+if(rst)
+q<=4'b0000;
+else
+q<=q+4'b0001;
+end
+
+always @(posedge clk)
+begin
+if(q==4'b1111)
+  cr<=1;
+else
+  cr<=0;
+end
+always @(*)
+begin
+x<=(tb & cr)|(!ta & cr)|(!ta & tb);
+end
+endmodule
+
+
+
+// Code your design here
+module seq(clk,rst);
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb_seq;
+endmodule

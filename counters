@@ -1,0 +1,19 @@
+module counters(q,clk,rst,n);
+
+  parameter n = 5;
+  input clk,rst;
+  output [n-1:0]q;
+  reg [n-1:0];
+
+  always @ (posedge clk or posedge rst)
+  begin
+    if(rst)
+      q<='b0;
+    else
+      q<=q+1;
+  end
+endmodule
+
+
+module tb_counter;
+  wire
